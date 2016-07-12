@@ -10,7 +10,7 @@ import java.io.File;
 
 import static com.ewyboy.seeddrop.reference.Reference.*;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = BUILD_VERSION)
+@Mod(modid = MOD_ID, name = MOD_NAME, version = BUILD_VERSION, acceptableRemoteVersions = "*")
 public class SeedDrop {
     
     @EventHandler

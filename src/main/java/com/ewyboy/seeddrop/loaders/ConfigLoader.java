@@ -1,6 +1,5 @@
 package com.ewyboy.seeddrop.loaders;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
@@ -8,37 +7,31 @@ import java.io.File;
 /** Created by EwyBoy **/
 public class ConfigLoader {
 
-    static boolean disableWheat, disablePumpkin, disableMelon, disableBeet, disableCarrot, disablePotato, disablePoisonPotato;
-    static boolean disableDrops[] = {
-        disableWheat,
-        disablePumpkin,
-        disableMelon,
-        disableBeet,
-        disableCarrot,
-        disablePotato,
-        disablePoisonPotato
-    };
-
-    static int dropChanceWheat, dropChancePumpkin, dropChanceMelon, dropChanceBeet, dropChanceCarrot, dropChancePotato, dropChancePoisonPotato;
-    static int dropChances[] = {
-            dropChanceWheat,
-            dropChancePumpkin,
-            dropChanceMelon,
-            dropChanceBeet,
-            dropChanceCarrot,
-            dropChancePotato,
-            dropChancePoisonPotato
+    public static String[] customDrops = new String[] {
+            "minecraft:wheat_seeds",
+                "10",
+            "minecraft:pumpkin_seeds",
+                "10",
+            "minecraft:melon_seeds",
+                "10",
+            "minecraft:beetroot_seeds",
+                "10",
+            "minecraft:carrot",
+                "10",
+            "minecraft:potato",
+                "10",
+            "minecraft:poisonous_potato",
+                "10"
     };
 
     public static void init(File configurationFile) {
         Configuration config = new Configuration(configurationFile);
-
-        config.load();
-            for (int i = 0; i < SeedLoader.drops.length; i++) {
-                String dropName = new ItemStack(SeedLoader.drops[i]).getDisplayName().toUpperCase();
-                disableDrops[i] = config.getBoolean("Disable " + dropName + " Drops", "DISABLE", false, "Set to true to disable the drop of " + dropName);
-                dropChances[i] = config.getInt(dropName + " Drop Chance", "DROP CHANCES", 10, 0, 100, "Sets the drop chance(%) of " + dropName);
-            }
-        config.save();
+        customDrops = config.getStringList("SeedDrop Drop List", Configuration.CATEGORY_GENERAL, customDrops,
+                "How to configure this mod:" + "\n" +
+                "\n" + "First Line: minecraft:dirt  [What to drop when grass is broken]" +
+                "\n" + "Second Line: 20  [Drop weight for item/block above (Vanilla Wheat Seeds is 10)]" +
+                "\n" + "You can edit / remove all the entries on this list as well as add new ones." + "\n" + "\n"
+        );
+        if (config.hasChanged()) config.save();
     }
 }

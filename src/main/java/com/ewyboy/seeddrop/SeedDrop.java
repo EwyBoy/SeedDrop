@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
@@ -18,8 +19,11 @@ public class SeedDrop {
     public static final String MOD_ID = "seeddrop";
     public static final String MOD_NAME = "SeedDrop";
 
+    public static Logger LOGGER;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        LOGGER = event.getModLog();
         ConfigLoader.init(new File("config/" , MOD_NAME + ".cfg"));
     }
 

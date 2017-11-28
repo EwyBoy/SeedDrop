@@ -4,6 +4,7 @@ import com.ewyboy.seeddrop.loaders.ConfigLoader;
 import com.ewyboy.seeddrop.loaders.SeedLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
@@ -18,8 +19,12 @@ public class SeedDrop {
     public static final String MOD_NAME = "SeedDrop";
 
     @EventHandler
-    public void init(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event) {
         ConfigLoader.init(new File("config/" , MOD_NAME + ".cfg"));
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
         SeedLoader.registerSeeds();
     }
 }

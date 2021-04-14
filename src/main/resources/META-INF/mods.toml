@@ -1,0 +1,19 @@
+modLoader="javafml"
+loaderVersion="[32,)"
+license="MIT License"
+issueTrackerURL="https://github.com/EwyBoy/SeedDrop"
+credits="Thank you for choosing Seed Drop!"
+authors="Ewy"
+
+[[mods]]
+modId="seeddrop"
+version="${file.jarVersion}"
+displayName="Seed Drop"
+description="Customize seed loot tables"
+
+[[dependencies.seeddrop]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.1,1.17)"
+ordering="NONE"
+side="BOTH"

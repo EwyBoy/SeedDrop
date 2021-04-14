@@ -1,47 +1,37 @@
 package com.ewyboy.seeddrop;
 
-import com.ewyboy.seeddrop.loaders.ConfigLoader;
-import com.ewyboy.seeddrop.loaders.SeedLoader;
+import com.ewyboy.seeddrop.commands.CommandCenter;
+import com.ewyboy.seeddrop.config.SeedConfig;
+import com.ewyboy.seeddrop.json.JSONHandler;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-<<<<<<< HEAD
-=======
-import net.minecraftforge.fml.common.Mod.EventHandler;
->>>>>>> master
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.Logger;
-
-import java.io.File;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.network.FMLNetworkConstants;
+import org.apache.commons.lang3.tuple.Pair;
 
 import static com.ewyboy.seeddrop.SeedDrop.MOD_ID;
-import static com.ewyboy.seeddrop.SeedDrop.MOD_NAME;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, acceptableRemoteVersions = "*")
+@Mod(MOD_ID)
 public class SeedDrop {
 
     public static final String MOD_ID = "seeddrop";
-    public static final String MOD_NAME = "SeedDrop";
-    public static Logger LOGGER;
 
-<<<<<<< HEAD
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        ConfigLoader.init(new File("config/" , MOD_NAME + ".cfg"));
+    public SeedDrop() {
+        makeServerSide();
+        SeedConfig.setup();
+        JSONHandler.setup();
+        MinecraftForge.EVENT_BUS.addListener(this :: onServerStart);
     }
 
-    @Mod.EventHandler
-=======
-    public static Logger LOGGER;
-
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        LOGGER = event.getModLog();
-        ConfigLoader.init(new File("config/" , MOD_NAME + ".cfg"));
+    //Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
+    private void makeServerSide() {
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
     }
 
-    @EventHandler
->>>>>>> master
-    public void init(FMLInitializationEvent event) {
-        SeedLoader.registerSeeds();
+    public void onServerStart(FMLServerStartingEvent event) {
+        new CommandCenter(event.getServer().getCommands().getDispatcher());
     }
+
 }

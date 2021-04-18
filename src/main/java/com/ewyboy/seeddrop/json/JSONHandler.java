@@ -6,7 +6,9 @@ import com.ewyboy.seeddrop.json.objects.DropEntry;
 import com.ewyboy.seeddrop.util.ModLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
@@ -15,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class JSONHandler {
 
@@ -22,10 +25,14 @@ public class JSONHandler {
     public static final File JSON_FILE = new File(FMLPaths.CONFIGDIR.get() + "/seeddrop/SeedDrops.json");
 
     private static final List<DropEntry> dropEntries = new ArrayList<>(); static {
-        dropEntries.add(new DropEntry("minecraft:wheat_seeds", 12.5D));
-        dropEntries.add(new DropEntry("minecraft:melon_seeds", 12.5D));
-        dropEntries.add(new DropEntry("minecraft:pumpkin_seeds", 12.5D));
-        dropEntries.add(new DropEntry("minecraft:beetroot_seeds", 12.5D));
+        //dropEntries.add(new DropEntry("minecraft:wheat_seeds", 12.5D));
+        //dropEntries.add(new DropEntry("minecraft:melon_seeds", 12.5D));
+        //dropEntries.add(new DropEntry("minecraft:pumpkin_seeds", 12.5D));
+        //dropEntries.add(new DropEntry("minecraft:beetroot_seeds", 12.5D));
+
+        for (Item item : ForgeRegistries.ITEMS) {
+            dropEntries.add(new DropEntry(Objects.requireNonNull(item.getRegistryName()).toString(), 0.0025));
+        }
     }
 
     public static DropConfig dropConfig = new DropConfig(dropEntries);

@@ -25,14 +25,14 @@ public class JSONHandler {
     public static final File JSON_FILE = new File(FMLPaths.CONFIGDIR.get() + "/seeddrop/SeedDrops.json");
 
     private static final List<DropEntry> dropEntries = new ArrayList<>(); static {
-        //dropEntries.add(new DropEntry("minecraft:wheat_seeds", 12.5D));
-        //dropEntries.add(new DropEntry("minecraft:melon_seeds", 12.5D));
-        //dropEntries.add(new DropEntry("minecraft:pumpkin_seeds", 12.5D));
-        //dropEntries.add(new DropEntry("minecraft:beetroot_seeds", 12.5D));
+        dropEntries.add(new DropEntry("minecraft:wheat_seeds", 12.5D));
+        dropEntries.add(new DropEntry("minecraft:melon_seeds", 12.5D));
+        dropEntries.add(new DropEntry("minecraft:pumpkin_seeds", 12.5D));
+        dropEntries.add(new DropEntry("minecraft:beetroot_seeds", 12.5D));
 
-        for (Item item : ForgeRegistries.ITEMS) {
+        /*for (Item item : ForgeRegistries.ITEMS) {
             dropEntries.add(new DropEntry(Objects.requireNonNull(item.getRegistryName()).toString(), 0.0025));
-        }
+        }*/
     }
 
     public static DropConfig dropConfig = new DropConfig(dropEntries);

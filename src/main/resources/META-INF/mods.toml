@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[32,)"
+loaderVersion="[37,)"
 license="MIT License"
 issueTrackerURL="https://github.com/EwyBoy/SeedDrop"
 credits="Thank you for choosing Seed Drop!"
@@ -11,9 +11,16 @@ version="${file.jarVersion}"
 displayName="Seed Drop"
 description="Customize seed loot tables"
 
+[[dependencies.oretweaker]]
+modId="forge"
+mandatory=true
+versionRange="[37,)"
+ordering="NONE"
+side="BOTH"
+
 [[dependencies.seeddrop]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.16.1,1.17)"
+versionRange="[1.17.+, 1.18)"
 ordering="NONE"
 side="BOTH"

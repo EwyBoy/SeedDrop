@@ -6,7 +6,7 @@ import com.ewyboy.seeddrop.json.objects.DropEntry;
 import com.ewyboy.seeddrop.util.ModLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -31,7 +31,7 @@ public class JSONHandler {
         //dropEntries.add(new DropEntry("minecraft:beetroot_seeds", 12.5D));
 
         for (Item item : ForgeRegistries.ITEMS) {
-            dropEntries.add(new DropEntry(Objects.requireNonNull(item.getRegistryName()).toString(), 0.0025));
+            dropEntries.add(new DropEntry(Objects.requireNonNull(item.getRegistryName()).toString(), 0.025));
         }
     }
 

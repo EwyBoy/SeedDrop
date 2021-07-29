@@ -4,13 +4,13 @@ import com.ewyboy.seeddrop.SeedDrop;
 import com.ewyboy.seeddrop.commands.server.*;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.command.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 public class CommandCenter {
 
-    public CommandCenter(CommandDispatcher<CommandSource> dispatcher) {
+    public CommandCenter(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            LiteralArgumentBuilder.<CommandSource> literal(SeedDrop.MOD_ID)
+            LiteralArgumentBuilder.<CommandSourceStack> literal(SeedDrop.MOD_ID)
                 .then(CommandReloadJSON.register())
                 .then(CommandAddEntry.register())
                 .then(CommandRemoveEntry.register())

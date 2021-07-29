@@ -5,12 +5,12 @@ import com.ewyboy.seeddrop.json.objects.DropEntry;
 import com.ewyboy.seeddrop.json.JSONHandler;
 import com.ewyboy.seeddrop.util.ModLogger;
 import com.google.gson.JsonObject;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.event.RegistryEvent;
@@ -33,7 +33,7 @@ public class GrassDrops {
     public static class GrassDropSerializer extends GlobalLootModifierSerializer<GrassDropModifier> {
 
         @Override
-        public GrassDropModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditions) {
+        public GrassDropModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditions) {
             return new GrassDropModifier(conditions);
         }
 
@@ -46,7 +46,7 @@ public class GrassDrops {
 
     private static class GrassDropModifier extends LootModifier {
 
-        protected GrassDropModifier(ILootCondition[] conditionsIn) {
+        protected GrassDropModifier(LootItemCondition[] conditionsIn) {
             super(conditionsIn);
         }
 

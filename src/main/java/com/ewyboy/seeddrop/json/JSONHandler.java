@@ -24,7 +24,9 @@ public class JSONHandler {
     private static final Gson gson = new Gson();
     public static final File JSON_FILE = new File(FMLPaths.CONFIGDIR.get() + "/seeddrop/SeedDrops.json");
 
-    private static final List<DropEntry> dropEntries = new ArrayList<>(); static {
+    private static final List<DropEntry> dropEntries = new ArrayList<>();
+
+    static {
         //dropEntries.add(new DropEntry("minecraft:wheat_seeds", 12.5D));
         //dropEntries.add(new DropEntry("minecraft:melon_seeds", 12.5D));
         //dropEntries.add(new DropEntry("minecraft:pumpkin_seeds", 12.5D));

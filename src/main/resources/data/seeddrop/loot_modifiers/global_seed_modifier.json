@@ -2,16 +2,12 @@
   "type": "seeddrop:seed_drops",
   "conditions": [
     {
-      "condition": "minecraft:random_chance",
-      "chance": 1.00
-    },
-    {
       "condition": "minecraft:inverted",
       "term": {
-        "condition": "minecraft:match_tool",
-        "predicate": {
-          "item": "minecraft:shears"
-        }
+          "condition": "minecraft:match_tool",
+          "predicate": {
+              "tag": "forge:shears"
+          }
       }
     },
     {

@@ -52,7 +52,7 @@ public class GrassDrops {
 
         @Nonnull
         @Override
-        public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+        public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext ctx) {
             generatedLoot.removeIf(itemStack -> itemStack.getItem() == Items.WHEAT_SEEDS);
 
             List<ItemStack> finalLootList = new ArrayList<>();

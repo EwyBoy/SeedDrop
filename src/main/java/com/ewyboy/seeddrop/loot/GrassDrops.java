@@ -27,7 +27,10 @@ public class GrassDrops {
 
     @SubscribeEvent
     public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> registryEvent) {
+        ModLogger.info("Registering :: GrassDropSerializer");
         registryEvent.getRegistry().register(new GrassDropSerializer().setRegistryName(SeedDrop.MOD_ID, "seed_drops"));
+
+        ForgeRegistries.LOOT_MODIFIER_SERIALIZERS.forEach(globalLootModifierSerializer -> ModLogger.info(globalLootModifierSerializer.toString()));
     }
 
     public static class GrassDropSerializer extends GlobalLootModifierSerializer<GrassDropModifier> {

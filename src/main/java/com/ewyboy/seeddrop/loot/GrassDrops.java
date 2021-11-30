@@ -55,6 +55,8 @@ public class GrassDrops {
         public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
             generatedLoot.removeIf(itemStack -> itemStack.getItem() == Items.WHEAT_SEEDS);
 
+            ModLogger.info("Hello????");
+
             List<ItemStack> finalLootList = new ArrayList<>();
             List<DropEntry> dropEntries = JSONHandler.dropConfig.getDropConfig();
 

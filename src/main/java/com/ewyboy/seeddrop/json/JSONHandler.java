@@ -35,6 +35,10 @@ public class JSONHandler {
 
     public static DropConfig dropConfig = new DropConfig(dropEntries);
 
+    public static DropConfig getDropConfig() {
+        return dropConfig;
+    }
+
     public static void setup() {
         createDirectory();
         if(!JSON_FILE.exists()) {

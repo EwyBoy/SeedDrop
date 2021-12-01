@@ -27,10 +27,7 @@ public class GrassDrops {
 
     @SubscribeEvent
     public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> registryEvent) {
-        ModLogger.info("Registering :: GrassDropSerializer");
         registryEvent.getRegistry().register(new GrassDropSerializer().setRegistryName(SeedDrop.MOD_ID, "seed_drops"));
-
-        ForgeRegistries.LOOT_MODIFIER_SERIALIZERS.forEach(globalLootModifierSerializer -> ModLogger.info(globalLootModifierSerializer.toString()));
     }
 
     public static class GrassDropSerializer extends GlobalLootModifierSerializer<GrassDropModifier> {
@@ -58,18 +55,19 @@ public class GrassDrops {
         public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
             generatedLoot.removeIf(itemStack -> itemStack.getItem() == Items.WHEAT_SEEDS);
 
-            ModLogger.info("Hello????");
-
             List<ItemStack> finalLootList = new ArrayList<>();
             List<DropEntry> dropEntries = JSONHandler.dropConfig.getDropConfig();
 
             for(DropEntry dropEntry : dropEntries) {
+
                 Item seedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(dropEntry.getItem()));
                 ItemStack seedItemStack = new ItemStack(seedItem);
                 generatedLoot.add(new ItemStack(seedItem));
+
                 double drop_percentage = dropEntry.getChance();
 
-                if(!generatedLoot.isEmpty() && drop_percentage < 100) {
+                if(!generatedLoot.isEmpty() && drop_percentage <= 100) {
+
                     double randomValue = Math.random();
 
                     if(randomValue < drop_percentage / 100) {

@@ -87,6 +87,7 @@ curseforge {
         changelog = file('CHANGELOG.md')
         releaseType = "${RELEASE_TYPE}"
         addGameVersion 'Forge'
+        addGameVersion 'Java 16'
         addGameVersion '1.17.1'
         addGameVersion '1.17'
         mainArtifact(jar) {

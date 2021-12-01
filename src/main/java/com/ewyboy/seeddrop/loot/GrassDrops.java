@@ -64,7 +64,7 @@ public class GrassDrops {
                 generatedLoot.add(new ItemStack(seedItem));
                 double drop_percentage = dropEntry.getChance();
 
-                if(!generatedLoot.isEmpty() && drop_percentage < 100) {
+                if(!generatedLoot.isEmpty() && drop_percentage <= 100) {
                     double randomValue = Math.random();
 
                     if(randomValue < drop_percentage / 100) {

@@ -1,6 +1,6 @@
-**v1.17.1 - 2.1.2**
-* Fixed bug where 100% made nothing drop at all
-* Bumped to the latest forge version
+**v1.17.1 - 2.1.3**  
+* Fixed bug where 100% made nothing drop at all  
+* Bumped to the latest forge RB version  
 
 **v1.17.1 - 2.1.2**
 * Fixed bug Modded Shears Don't Work Properly [#8](https://github.com/EwyBoy/SeedDrop/issues/8)

@@ -27,10 +27,10 @@ public class JSONHandler {
     private static final List<DropEntry> dropEntries = new ArrayList<>();
 
     static {
-        dropEntries.add(new DropEntry("minecraft:wheat_seeds", 12.5D));
-        dropEntries.add(new DropEntry("minecraft:melon_seeds", 12.5D));
-        dropEntries.add(new DropEntry("minecraft:pumpkin_seeds", 12.5D));
-        dropEntries.add(new DropEntry("minecraft:beetroot_seeds", 12.5D));
+        dropEntries.add(new DropEntry("minecraft:wheat_seeds", 3.125D));
+        dropEntries.add(new DropEntry("minecraft:melon_seeds", 3.125D));
+        dropEntries.add(new DropEntry("minecraft:pumpkin_seeds", 3.125D));
+        dropEntries.add(new DropEntry("minecraft:beetroot_seeds", 3.125D));
     }
 
     public static DropConfig dropConfig = new DropConfig(dropEntries);

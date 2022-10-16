@@ -5,7 +5,7 @@ import com.ewyboy.seeddrop.json.objects.DropEntry;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 
 public class CommandViewEntries {
@@ -19,9 +19,9 @@ public class CommandViewEntries {
     }
 
     private static int viewEntries(CommandSourceStack source) {
-        source.sendSuccess(new TextComponent(ChatFormatting.BOLD + "Drops:"), true);
+        source.sendSuccess(Component.literal(ChatFormatting.BOLD + "Drops:"), true);
         for (DropEntry drop : JSONHandler.dropConfig.getDropConfig()) {
-            source.sendSuccess(new TextComponent("[" + ChatFormatting.GREEN + drop.getItem() + ChatFormatting.WHITE + "]" + " " + ChatFormatting.GOLD + drop.getChance() + "%"), true);
+            source.sendSuccess(Component.literal("[" + ChatFormatting.GREEN + drop.getItem() + ChatFormatting.WHITE + "]" + " " + ChatFormatting.GOLD + drop.getChance() + "%"), true);
         }
 
         return 0;

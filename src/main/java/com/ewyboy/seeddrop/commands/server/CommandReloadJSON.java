@@ -4,7 +4,7 @@ import com.ewyboy.seeddrop.json.JSONHandler;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 
 public class CommandReloadJSON {
@@ -20,10 +20,10 @@ public class CommandReloadJSON {
     private static int reload(CommandSourceStack source) {
         try {
             JSONHandler.readJson(JSONHandler.JSON_FILE);
-            source.sendSuccess(new TextComponent(ChatFormatting.GREEN + "SUCCESS: " + ChatFormatting.WHITE + "Config reloaded"), true);
+            source.sendSuccess(Component.literal(ChatFormatting.GREEN + "SUCCESS: " + ChatFormatting.WHITE + "Config reloaded"), true);
         } catch (Exception e) {
             e.printStackTrace();
-            source.sendSuccess(new TextComponent(ChatFormatting.RED + "ERROR: " + ChatFormatting.WHITE + "Config failed to reload"), true);
+            source.sendSuccess(Component.literal(ChatFormatting.RED + "ERROR: " + ChatFormatting.WHITE + "Config failed to reload"), true);
         }
         return 0;
     }

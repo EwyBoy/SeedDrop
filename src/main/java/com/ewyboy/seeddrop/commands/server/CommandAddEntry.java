@@ -34,9 +34,9 @@ public class CommandAddEntry {
         DropEntry dropEntry = new DropEntry(entryName, chance);
 
         if (JSONHandler.addEntry(dropEntry)) {
-            source.sendSuccess(Component.literal(ChatFormatting.GREEN + entryName + ChatFormatting.WHITE + " added to config"), true);
+            source.sendSuccess(() -> Component.literal(ChatFormatting.GREEN + entryName + ChatFormatting.WHITE + " added to config"), true);
         } else {
-            source.sendSuccess(Component.literal(ChatFormatting.RED + "ERROR: " + entryName.toUpperCase() + ChatFormatting.WHITE + " is already found in config"), true);
+            source.sendSuccess(() -> Component.literal(ChatFormatting.RED + "ERROR: " + entryName.toUpperCase() + ChatFormatting.WHITE + " is already found in config"), true);
         }
 
         return 0;

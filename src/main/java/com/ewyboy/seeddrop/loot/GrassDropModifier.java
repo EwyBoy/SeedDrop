@@ -17,6 +17,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GrassDropModifier extends LootModifier {
 
@@ -38,7 +39,7 @@ public class GrassDropModifier extends LootModifier {
         for(DropEntry dropEntry : dropEntries) {
 
             Item seedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(dropEntry.getItem()));
-            ItemStack seedItemStack = new ItemStack(seedItem);
+            ItemStack seedItemStack = new ItemStack(Objects.requireNonNull(seedItem));
             generatedLoot.add(new ItemStack(seedItem));
 
             double drop_percentage = dropEntry.getChance();

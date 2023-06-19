@@ -4,14 +4,14 @@
     {
       "condition": "minecraft:inverted",
       "term": {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-              "tag": "forge:shears"
-          }
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "tag": "forge:shears"
+        }
       }
     },
     {
-      "condition": "alternative",
+      "condition": "any_of",
       "terms": [
         {
           "condition": "block_state_property",

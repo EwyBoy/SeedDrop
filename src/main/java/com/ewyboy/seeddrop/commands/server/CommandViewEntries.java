@@ -19,9 +19,9 @@ public class CommandViewEntries {
     }
 
     private static int viewEntries(CommandSourceStack source) {
-        source.sendSuccess(Component.literal(ChatFormatting.BOLD + "Drops:"), true);
+        source.sendSuccess(() -> Component.literal(ChatFormatting.BOLD + "Drops:"), true);
         for (DropEntry drop : JSONHandler.dropConfig.getDropConfig()) {
-            source.sendSuccess(Component.literal("[" + ChatFormatting.GREEN + drop.getItem() + ChatFormatting.WHITE + "]" + " " + ChatFormatting.GOLD + drop.getChance() + "%"), true);
+            source.sendSuccess(() -> Component.literal("[" + ChatFormatting.GREEN + drop.getItem() + ChatFormatting.WHITE + "]" + " " + ChatFormatting.GOLD + drop.getChance() + "%"), true);
         }
 
         return 0;

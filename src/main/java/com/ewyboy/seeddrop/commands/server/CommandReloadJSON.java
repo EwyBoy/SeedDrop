@@ -20,10 +20,10 @@ public class CommandReloadJSON {
     private static int reload(CommandSourceStack source) {
         try {
             JSONHandler.readJson(JSONHandler.JSON_FILE);
-            source.sendSuccess(Component.literal(ChatFormatting.GREEN + "SUCCESS: " + ChatFormatting.WHITE + "Config reloaded"), true);
+            source.sendSuccess(() -> Component.literal(ChatFormatting.GREEN + "SUCCESS: " + ChatFormatting.WHITE + "Config reloaded"), true);
         } catch (Exception e) {
             e.printStackTrace();
-            source.sendSuccess(Component.literal(ChatFormatting.RED + "ERROR: " + ChatFormatting.WHITE + "Config failed to reload"), true);
+            source.sendSuccess(() -> Component.literal(ChatFormatting.RED + "ERROR: " + ChatFormatting.WHITE + "Config failed to reload"), true);
         }
         return 0;
     }

@@ -26,7 +26,7 @@ public class SeedDrop {
 
     private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> GLM = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
 
-    private static final RegistryObject<Codec<GrassDropModifier>> GRASS_DROP = GLM.register("seed_drops",() -> GrassDropModifier.CODEC);
+    private static final RegistryObject<Codec<GrassDropModifier>> GRASS_DROP = GLM.register("seed_drops", () -> GrassDropModifier.CODEC);
 
     public SeedDrop() {
         ignoreServerOnly();

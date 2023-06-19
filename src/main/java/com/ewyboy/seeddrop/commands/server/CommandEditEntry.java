@@ -36,9 +36,9 @@ public class CommandEditEntry {
         if (JSONHandler.containsEntry(dropEntry)) {
             JSONHandler.removeEntry(entryName);
             JSONHandler.addEntry(dropEntry);
-            source.sendSuccess(Component.literal(ChatFormatting.GREEN + entryName + ChatFormatting.WHITE + " changed to " + ChatFormatting.GOLD + newChance + "%"), true);
+            source.sendSuccess(() -> Component.literal(ChatFormatting.GREEN + entryName + ChatFormatting.WHITE + " changed to " + ChatFormatting.GOLD + newChance + "%"), true);
         } else {
-            source.sendSuccess(Component.literal(ChatFormatting.RED + "ERROR: " +  entryName.toUpperCase() + ChatFormatting.WHITE + " was not found in config"), true);
+            source.sendSuccess(() -> Component.literal(ChatFormatting.RED + "ERROR: " +  entryName.toUpperCase() + ChatFormatting.WHITE + " was not found in config"), true);
         }
 
         return 0;

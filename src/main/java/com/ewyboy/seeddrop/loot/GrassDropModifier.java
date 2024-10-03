@@ -33,28 +33,23 @@ public class GrassDropModifier extends LootModifier {
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         generatedLoot.removeIf(itemStack -> itemStack.getItem() == Items.WHEAT_SEEDS);
 
-        ObjectArrayList<ItemStack> finalLootList = new ObjectArrayList<>();
         List<DropEntry> dropEntries = JSONHandler.dropConfig.getDropConfig();
 
         for(DropEntry dropEntry : dropEntries) {
-
             Item seedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(dropEntry.getItem()));
-            ItemStack seedItemStack = new ItemStack(Objects.requireNonNull(seedItem));
-            generatedLoot.add(new ItemStack(seedItem));
+            if (seedItem == null) {
+                break;
+            }
+            ItemStack seedItemStack = new ItemStack(seedItem);
 
-            double drop_percentage = dropEntry.getChance();
-
-            if(!generatedLoot.isEmpty() && drop_percentage <= 100) {
-
-                double randomValue = Math.random();
-
-                if(randomValue < drop_percentage / 100) {
-                    finalLootList.add(seedItemStack);
-                }
+            double dropChance = dropEntry.getChance() / 100d;
+            double randomValue = Math.random();
+            if(randomValue < dropChance) {
+                generatedLoot.add(seedItemStack);
             }
         }
 
-        return finalLootList;
+        return generatedLoot;
     }
 
     @Override

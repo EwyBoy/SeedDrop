@@ -6,6 +6,7 @@ import com.ewyboy.seeddrop.json.objects.DropEntry;
 import com.ewyboy.seeddrop.util.ModLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
@@ -89,7 +90,12 @@ public class JSONHandler {
 
     public static void readJson(File jsonFile) {
         try(Reader reader = new FileReader(jsonFile)) {
-            dropConfig = gson.fromJson(reader, DropConfig.class);
+            DropConfig config = gson.fromJson(reader, DropConfig.class);
+            // An empty file parses to null and would crash every grass drop, keep the current entries instead
+            if (config == null || config.getDropConfig() == null) {
+                throw new JsonParseException(jsonFile.getName() + " has no dropConfig list");
+            }
+            dropConfig = config;
         } catch(IOException e) {
             e.printStackTrace();
         }

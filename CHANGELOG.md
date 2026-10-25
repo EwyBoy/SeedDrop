@@ -6,6 +6,7 @@
 * #13: Seed Drop only swaps the vanilla wheat seeds and adds its own drops, so drops other mods add to grass (like Farmer's Delight straw) are kept. Covered by game tests now
 * Unknown or misspelled items in `SeedDrops.json` are skipped, they used to stop every entry after them from dropping
 * `config/seeddrop/Info.txt` is written properly, it used to be left empty
+* An empty `SeedDrops.json` is reported as an error instead of crashing when grass is broken, `/seeddrop reload` keeps the current entries
 * Removed the empty `SeedDrop.toml` server config, it had no settings
 
 **v1.20.x - 2.3.0**

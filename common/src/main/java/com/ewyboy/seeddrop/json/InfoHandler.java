@@ -18,10 +18,12 @@ public class InfoHandler {
 
     private static void createInfoFile() {
         try {
-            if (InfoHandler.INFO_FILE.createNewFile()) {
+            // Older versions never closed the writer and left an empty file behind, so fill those in too
+            if (InfoHandler.INFO_FILE.createNewFile() || InfoHandler.INFO_FILE.length() == 0) {
                 ModLogger.info("Creating Seed Drop information file: " + InfoHandler.INFO_FILE.getName());
-                FileWriter writer = new FileWriter(INFO_FILE);
-                writeInfoFile(writer);
+                try (FileWriter writer = new FileWriter(INFO_FILE)) {
+                    writeInfoFile(writer);
+                }
             }
         } catch (IOException e) {
             ModLogger.error("Failed to create information file: " + InfoHandler.INFO_FILE.getName());

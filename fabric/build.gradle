@@ -11,6 +11,16 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 }
 
+// Game tests live in their own source set so they stay out of the released jar.
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = "${mod_id}-gametest"
+        enableClientGameTests = false
+        eula = true
+    }
+}
+
 loom {
     runs {
         client {

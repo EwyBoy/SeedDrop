@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "seeddrop-gametest",
+  "version": "1.0.0",
+  "name": "Seed Drop Game Tests",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "com.ewyboy.seeddrop.SeedDropGameTests"
+    ]
+  }
+}

@@ -26,6 +26,7 @@ public class GrassDrops {
         return state != null && GRASS_BLOCKS.contains(state.getBlock()) && (tool == null || !tool.is(SHEARS));
     }
 
+    // Only touches vanilla wheat seeds and appends, other mods' drops must survive (#13)
     public static void addDrops(List<ItemStack> generatedLoot) {
         generatedLoot.removeIf(itemStack -> itemStack.getItem() == Items.WHEAT_SEEDS);
 

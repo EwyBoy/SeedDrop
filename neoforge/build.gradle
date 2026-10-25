@@ -4,6 +4,14 @@ plugins {
     id 'net.darkhax.curseforgegradle'
 }
 
+// Game tests live in their own source set so they stay out of the released jar.
+sourceSets {
+    gametest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
 neoForge {
     version = neoforge_version
     runs {
@@ -17,13 +25,21 @@ neoForge {
             server()
             programArgument '--nogui'
         }
+        gameTestServer {
+            type = 'gameTestServer'
+            sourceSet = sourceSets.gametest
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
+        }
     }
     mods {
         "${mod_id}" {
             sourceSet sourceSets.main
+            sourceSet sourceSets.gametest
         }
     }
 }
+
+neoForge.addModdingDependenciesTo(sourceSets.gametest)
 
 tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     if (project.hasProperty('CF_API_KEY')) {

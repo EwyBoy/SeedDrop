@@ -16,7 +16,7 @@ import java.util.Objects;
 public class CommandRemoveEntry {
 
     public static ArgumentBuilder<CommandSourceStack, ?> register(CommandBuildContext ctx) {
-        return Commands.literal("remove").requires((commandSource) -> commandSource.hasPermission(2))
+        return Commands.literal("remove").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
             .then(Commands.argument("item", ItemArgument.item(ctx))
             .executes((commandSource) -> removeEntry(
                     commandSource.getSource(),
@@ -26,7 +26,7 @@ public class CommandRemoveEntry {
     }
 
     private static int removeEntry(CommandSourceStack source, ItemInput itemInput) {
-        String entryName = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemInput.getItem())).toString();
+        String entryName = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemInput.item().value())).toString();
         if (JSONHandler.removeEntry(entryName)) {
             source.sendSuccess(() -> Component.literal(ChatFormatting.RED + entryName + ChatFormatting.WHITE + " removed from config"), true);
         } else {

@@ -11,7 +11,7 @@ import net.minecraft.ChatFormatting;
 public class CommandViewEntries {
 
     public static ArgumentBuilder<CommandSourceStack, ?> register() {
-        return Commands.literal("view").requires((commandSource) -> commandSource.hasPermission(2))
+        return Commands.literal("view").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
             .executes((commandSource) -> viewEntries(
                 commandSource.getSource()
             )

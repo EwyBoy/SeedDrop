@@ -1,14 +1,14 @@
 plugins {
     id 'multiloader-loader'
-    id 'fabric-loom'
+    id 'net.fabricmc.fabric-loom'
     id 'net.darkhax.curseforgegradle'
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    // No mappings declaration: Minecraft 26.x ships deobfuscated.
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 }
 
 // Game tests live in their own source set so they stay out of the released jar.
@@ -43,8 +43,9 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
         apiToken = project.getProperty('CF_API_KEY')
     }
 
-    // remapJar is the production artifact on 1.21.1, uploading `jar` would ship a dev jar.
-    def mainFile = upload(curseforge_id, remapJar)
+    // On 26.x this is `jar`, not `remapJar`: Minecraft ships deobfuscated, so Loom has no remap step.
+    // Note this is the opposite of the 1.21 branch, where uploading `jar` would ship a dev jar.
+    def mainFile = upload(curseforge_id, jar)
     mainFile.releaseType = release_type
     mainFile.addModLoader 'Fabric'
     mainFile.addGameVersion minecraft_version

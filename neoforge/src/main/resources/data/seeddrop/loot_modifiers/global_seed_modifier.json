@@ -1,35 +1,21 @@
 {
   "type": "seeddrop:seed_drops",
-  "conditions": [
-    {
-      "condition": "minecraft:inverted",
-      "term": {
-        "condition": "minecraft:match_tool",
-        "predicate": {
-          "items": "#c:tools/shear"
-        }
+  "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+      {
+        "type": "minecraft:inverted",
+        "term": "minecraft:tool/can_shear"
+      },
+      {
+        "type": "minecraft:match_block",
+        "blocks": [
+          "minecraft:short_grass",
+          "minecraft:tall_grass",
+          "minecraft:fern",
+          "minecraft:large_fern"
+        ]
       }
-    },
-    {
-      "condition": "any_of",
-      "terms": [
-        {
-          "condition": "block_state_property",
-          "block": "minecraft:short_grass"
-        },
-        {
-          "condition": "block_state_property",
-          "block": "minecraft:tall_grass"
-        },
-        {
-          "condition": "block_state_property",
-          "block": "minecraft:fern"
-        },
-        {
-          "condition": "block_state_property",
-          "block": "minecraft:large_fern"
-        }
-      ]
-    }
-  ]
+    ]
+  }
 }

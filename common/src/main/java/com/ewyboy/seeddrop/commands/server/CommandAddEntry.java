@@ -18,7 +18,7 @@ import java.util.Objects;
 public class CommandAddEntry {
 
     public static ArgumentBuilder<CommandSourceStack, ?> register(CommandBuildContext ctx) {
-        return Commands.literal("add").requires((commandSource) -> commandSource.hasPermission(2))
+        return Commands.literal("add").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
             .then(Commands.argument("item", ItemArgument.item(ctx))
             .then(Commands.argument("chance", DoubleArgumentType.doubleArg(0, 100))
             .executes((commandSource) -> addEntry(
@@ -30,7 +30,7 @@ public class CommandAddEntry {
     }
 
     private static int addEntry(CommandSourceStack source, ItemInput itemInput, double chance) {
-        String entryName = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemInput.getItem())).toString();
+        String entryName = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemInput.item().value())).toString();
         DropEntry dropEntry = new DropEntry(entryName, chance);
 
         if (JSONHandler.addEntry(dropEntry)) {

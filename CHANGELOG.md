@@ -1,8 +1,8 @@
-**v1.21.1 - 2.4.0**
-* Ported to 1.21.1 for NeoForge and Fabric
+**v26.3 - 2.4.0**
+* Ported to 26.3 for NeoForge and Fabric
 * Existing `SeedDrops.json` configs and the `/seeddrop` commands work unchanged
 * Short grass drops seeds again (the block was renamed from `grass` in 1.20.3)
-* Shears are detected with the common `c:tools/shear` tag
+* Shears are detected with vanilla's `minecraft:tool/can_shear` predicate on NeoForge and the common `c:tools/shear` tag on Fabric
 * #13: Seed Drop only swaps the vanilla wheat seeds and adds its own drops, so drops other mods add to grass (like Farmer's Delight straw) are kept. Covered by game tests now
 * Unknown or misspelled items in `SeedDrops.json` are skipped, they used to stop every entry after them from dropping
 * `config/seeddrop/Info.txt` is written properly, it used to be left empty

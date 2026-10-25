@@ -2,6 +2,7 @@ package com.ewyboy.seeddrop.loot;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -10,10 +11,12 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 public class GrassDropModifier extends LootModifier {
 
-    public GrassDropModifier(LootItemCondition[] conditions) {
-        super(conditions);
+    public GrassDropModifier(Optional<Holder<LootItemCondition>> condition, int priority) {
+        super(condition, priority);
     }
 
     public static final MapCodec<GrassDropModifier> CODEC = RecordCodecBuilder.mapCodec(

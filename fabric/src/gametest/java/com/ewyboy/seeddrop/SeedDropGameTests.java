@@ -3,9 +3,8 @@ package com.ewyboy.seeddrop;
 import com.ewyboy.seeddrop.json.JSONHandler;
 import com.ewyboy.seeddrop.json.objects.DropConfig;
 import com.ewyboy.seeddrop.json.objects.DropEntry;
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
-import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -15,13 +14,13 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-// Checks the LootTableMixin end to end, the shared drop logic is covered by the NeoForge game tests.
+// Checks the MODIFY_DROPS hook end to end, the shared drop logic is covered by the NeoForge game tests.
 // Run with ./gradlew :fabric:runGameTest
-public class SeedDropGameTests implements FabricGameTest {
+public class SeedDropGameTests {
 
     private static final BlockPos GRASS = new BlockPos(1, 2, 1);
 
-    @GameTest(template = EMPTY_STRUCTURE)
+    @GameTest
     public void grassDropsConfiguredSeeds(GameTestHelper helper) {
         placeGrass(helper);
         withMelonSeedsOnly(() -> helper.getLevel().destroyBlock(helper.absolutePos(GRASS), true));
@@ -31,7 +30,7 @@ public class SeedDropGameTests implements FabricGameTest {
         helper.succeed();
     }
 
-    @GameTest(template = EMPTY_STRUCTURE)
+    @GameTest
     public void shearsDropGrassOnly(GameTestHelper helper) {
         placeGrass(helper);
         withMelonSeedsOnly(() -> Block.dropResources(helper.getBlockState(GRASS), helper.getLevel(), helper.absolutePos(GRASS), null, null, new ItemStack(Items.SHEARS)));

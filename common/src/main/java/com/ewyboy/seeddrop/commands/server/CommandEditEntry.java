@@ -18,7 +18,7 @@ import java.util.Objects;
 public class CommandEditEntry {
 
     public static ArgumentBuilder<CommandSourceStack, ?> register(CommandBuildContext ctx) {
-        return Commands.literal("edit").requires((commandSource) -> commandSource.hasPermission(2))
+        return Commands.literal("edit").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
             .then(Commands.argument("item", ItemArgument.item(ctx))
             .then(Commands.argument("new chance", DoubleArgumentType.doubleArg(0, 100))
             .executes((commandSource) -> editEntry(
@@ -30,7 +30,7 @@ public class CommandEditEntry {
     }
 
     private static int editEntry(CommandSourceStack source, ItemInput itemInput, double newChance) {
-        String entryName = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemInput.getItem())).toString();
+        String entryName = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemInput.item().value())).toString();
         DropEntry dropEntry = new DropEntry(entryName, newChance);
 
         if (JSONHandler.containsEntry(dropEntry)) {

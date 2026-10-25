@@ -1,0 +1,48 @@
+plugins {
+    id 'multiloader-loader'
+    id 'fabric-loom'
+    id 'net.darkhax.curseforgegradle'
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+}
+
+loom {
+    runs {
+        client {
+            client()
+            setConfigName('Fabric Client')
+            ideConfigGenerated(true)
+            runDir('runs/client')
+        }
+        server {
+            server()
+            setConfigName('Fabric Server')
+            ideConfigGenerated(true)
+            runDir('runs/server')
+        }
+    }
+}
+
+tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    if (project.hasProperty('CF_API_KEY')) {
+        apiToken = project.getProperty('CF_API_KEY')
+    }
+
+    // remapJar is the production artifact on 1.21.1, uploading `jar` would ship a dev jar.
+    def mainFile = upload(curseforge_id, remapJar)
+    mainFile.releaseType = release_type
+    mainFile.addModLoader 'Fabric'
+    mainFile.addGameVersion minecraft_version
+    mainFile.addJavaVersion "Java ${java_version}"
+    mainFile.addEnvironment('Client', 'Server')
+
+    mainFile.changelog = rootProject.file('CHANGELOG.md')
+    mainFile.changelogType = 'markdown'
+
+    mainFile.displayName = "${mod_name}-${minecraft_version}-${version}-Fabric.jar"
+}

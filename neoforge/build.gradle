@@ -1,0 +1,44 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
+    id 'net.darkhax.curseforgegradle'
+}
+
+neoForge {
+    version = neoforge_version
+    runs {
+        configureEach {
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    if (project.hasProperty('CF_API_KEY')) {
+        apiToken = project.getProperty('CF_API_KEY')
+    }
+
+    def mainFile = upload(curseforge_id, jar)
+    mainFile.releaseType = release_type
+    mainFile.addModLoader 'NeoForge'
+    mainFile.addGameVersion minecraft_version
+    mainFile.addJavaVersion "Java ${java_version}"
+    mainFile.addEnvironment('Client', 'Server')
+
+    mainFile.changelog = rootProject.file('CHANGELOG.md')
+    mainFile.changelogType = 'markdown'
+
+    mainFile.displayName = "${mod_name}-${minecraft_version}-${version}-NeoForge.jar"
+}

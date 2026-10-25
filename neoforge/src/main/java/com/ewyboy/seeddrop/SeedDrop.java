@@ -24,7 +24,7 @@ public class SeedDrop {
 
     private static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<GrassDropModifier>> GRASS_DROP = GLM.register("seed_drops", () -> GrassDropModifier.CODEC);
 
-    // Being absent on the other network side is handled by displayTest in neoforge.mods.toml
+    // Server side only, see the note in neoforge.mods.toml
     public SeedDrop(IEventBus modEventBus) {
         JSONHandler.setup(FMLPaths.CONFIGDIR.get());
         InfoHandler.setup(FMLPaths.CONFIGDIR.get());

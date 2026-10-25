@@ -9,8 +9,8 @@ version="${version}"
 displayName="${mod_name}"
 authors="${mod_author}"
 description="${description}"
-# Server side only: clients without the mod can still join a server that has it, and vice versa.
-displayTest="IGNORE_ALL_VERSION"
+# Server side only, and nothing it registers is synced to clients, so clients without the mod can join.
+# NeoForge 1.20.5+ dropped displayTest and only checks synced registries and network payloads.
 
 [[dependencies.${mod_id}]]
 modId="neoforge"

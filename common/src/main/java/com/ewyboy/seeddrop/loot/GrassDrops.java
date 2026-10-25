@@ -33,9 +33,11 @@ public class GrassDrops {
         List<DropEntry> dropEntries = JSONHandler.dropConfig.getDropConfig();
 
         for(DropEntry dropEntry : dropEntries) {
-            Item seedItem = BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(dropEntry.getItem())).orElse(null);
+            // Skip entries for removed mods or typos instead of crashing or ending the loop
+            ResourceLocation itemId = dropEntry.getItem() == null ? null : ResourceLocation.tryParse(dropEntry.getItem());
+            Item seedItem = itemId == null ? null : BuiltInRegistries.ITEM.getOptional(itemId).orElse(null);
             if (seedItem == null) {
-                break;
+                continue;
             }
             ItemStack seedItemStack = new ItemStack(seedItem);
 

@@ -37,6 +37,15 @@ public class SeedDropGameTests {
     }
 
     @GameTest(template = "empty")
+    public static void skipsUnknownItems(GameTestHelper helper) {
+        List<ItemStack> loot = new ArrayList<>();
+        withDrops(List.of(new DropEntry("removedmod:seeds", 100), new DropEntry("Not An Item!", 100), new DropEntry("minecraft:melon_seeds", 100)), () -> GrassDrops.addDrops(loot));
+
+        helper.assertTrue(loot.size() == 1 && loot.get(0).is(Items.MELON_SEEDS), "Entries after an unknown item were skipped");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public static void grassDropsConfiguredSeeds(GameTestHelper helper) {
         placeGrass(helper);
         withMelonSeedsOnly(() -> helper.getLevel().destroyBlock(helper.absolutePos(GRASS), true));
@@ -63,8 +72,12 @@ public class SeedDropGameTests {
 
     // Swaps in a config that always drops melon seeds, without touching SeedDrops.json
     private static void withMelonSeedsOnly(Runnable action) {
+        withDrops(List.of(new DropEntry("minecraft:melon_seeds", 100)), action);
+    }
+
+    private static void withDrops(List<DropEntry> drops, Runnable action) {
         DropConfig config = JSONHandler.dropConfig;
-        JSONHandler.dropConfig = new DropConfig(new ArrayList<>(List.of(new DropEntry("minecraft:melon_seeds", 100))));
+        JSONHandler.dropConfig = new DropConfig(new ArrayList<>(drops));
         try {
             action.run();
         } finally {
